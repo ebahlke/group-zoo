@@ -87,23 +87,17 @@ public class FactorGroup extends Group {
   }
   
   public static void main(String[] args) {
-    PermutationGroup pg = new PermutationGroup(3);
-    LinkedList<Integer> l = new LinkedList<Integer>();
-    l.add(3);
-    l.add(1);
-    l.add(2);
-    LinkedList<Integer> k = new LinkedList<Integer>();
-    k.add(3);
-    k.add(2);
-    k.add(1);
-    Permutation perm = new Permutation(l);
-    Permutation perm2 = new Permutation(k);
-    System.out.println(perm.toString());
-    System.out.println(pg.isNormal(pg.generateSubgroup(perm)));
-    FactorGroup fg = new FactorGroup(pg, pg.generateSubgroup(perm));
-    System.out.println(fg.toString());
-    Coset c = new Coset(pg, pg.generateSubgroup(perm), pg.generateSubgroup(perm).get(0));
-    Coset d = new Coset(pg, pg.generateSubgroup(perm), perm2);
-    System.out.println(fg.operate(c, d));
+//    PermutationGroup pg = new PermutationGroup(3);
+//    Permutation perm = new Permutation(3, 1, 2);
+//    Permutation perm2 = new Permutation(3, 2, 1);
+//    System.out.println("Identity coset-generating candidate: " + perm.toString());
+//    System.out.println("Have we got a normal subgroup?: " + pg.isNormal(pg.generateSubgroup(perm)));
+//    System.out.println("Generating factor group of S3...");
+//    FactorGroup fg = new FactorGroup(pg, pg.generateSubgroup(perm));
+//    System.out.println(fg.toString());
+//    Coset c = new Coset(pg, pg.generateSubgroup(perm), pg.generateSubgroup(perm).get(0));
+//    Coset d = new Coset(pg, pg.generateSubgroup(perm), perm2);
+//    System.out.println("Testing operate.");
+//    System.out.println(fg.operate(c, d));
   }
 }

@@ -146,36 +146,35 @@ public class ZmodN extends Group {
 		  return new ModularInt(dimension + (nprime.getIntValue()%dimension));
   }
   
-  // TESTING:
   public static void main(String[] args) {
-    ZmodN fours = new ZmodN(4);
-    ModularInt three = new ModularInt(3);
-    ModularInt two = new ModularInt(2);
-    
-    System.out.println("Zmod4.getGroupOrder(): " + fours.getGroupOrder());
-    System.out.println("Zmod4.operate(three, two) should return one. Returns: " +
-                       fours.operate(three, two));
-    System.out.println("Zmod4.equals(two, three) should return false. Returns: " +
-                       fours.equals(two, three));
-    System.out.println("Zmod4.equals(three, new ModularInt(7)) should return true. Returns: " +
-                       fours.equals(three, new ModularInt(7)));
-    System.out.println("Zmod4.computeElementOrder(three) should return four. Returns: " +
-                       fours.computeElementOrder(three));
-    System.out.println("Zmod4.generateSubgroup(three) should return Zmod4. Returns: " +
-                       fours.generateSubgroup(three));
-    System.out.println("Zmod4.generateSubgroup(two) should return [0], [2]. Returns: " +
-                       fours.generateSubgroup(two));
-    System.out.println("Zmod4.getInverse(new ModularInt(6)) should return [2]. Returns: " +
-                       fours.getInverse(new ModularInt(6)));
-    System.out.println("Does <[3]> = <[3]>? (yes): " +
-                       fours.subgroupEquals(fours.generateSubgroup(three), fours.generateSubgroup(three)));
-    System.out.println("Does <[3]> = <[2]>? (no): " +
-                       fours.subgroupEquals(fours.generateSubgroup(three), fours.generateSubgroup(two)));
-    System.out.println("Is <[3]> a normal subgroup? (yes): " +
-                       fours.isNormal(fours.generateSubgroup(three)));
-    System.out.println("Zmod4.findIndex(fours.getMembers(), 1) should give 1: " +
-                       fours.findIndex(fours.getMembers(), new ModularInt(1)));
-    System.out.println("Zmod4.findIndex(<[2]>, 1) should give -1: " +
-                       fours.findIndex(fours.generateSubgroup(new ModularInt(2)), new ModularInt(5)));
+//    ZmodN fours = new ZmodN(4);
+//    ModularInt three = new ModularInt(3);
+//    ModularInt two = new ModularInt(2);
+//    
+//    System.out.println("Zmod4.getGroupOrder(): " + fours.getGroupOrder());
+//    System.out.println("Zmod4.operate(three, two) should return one. Returns: " +
+//                       fours.operate(three, two));
+//    System.out.println("Zmod4.equals(two, three) should return false. Returns: " +
+//                       fours.equals(two, three));
+//    System.out.println("Zmod4.equals(three, new ModularInt(7)) should return true. Returns: " +
+//                       fours.equals(three, new ModularInt(7)));
+//    System.out.println("Zmod4.computeElementOrder(three) should return four. Returns: " +
+//                       fours.computeElementOrder(three));
+//    System.out.println("Zmod4.generateSubgroup(three) should return Zmod4. Returns: " +
+//                       fours.generateSubgroup(three));
+//    System.out.println("Zmod4.generateSubgroup(two) should return [0], [2]. Returns: " +
+//                       fours.generateSubgroup(two));
+//    System.out.println("Zmod4.getInverse(new ModularInt(6)) should return [2]. Returns: " +
+//                       fours.getInverse(new ModularInt(6)));
+//    System.out.println("Does <[3]> = <[3]>? (yes): " +
+//                       fours.subgroupEquals(fours.generateSubgroup(three), fours.generateSubgroup(three)));
+//    System.out.println("Does <[3]> = <[2]>? (no): " +
+//                       fours.subgroupEquals(fours.generateSubgroup(three), fours.generateSubgroup(two)));
+//    System.out.println("Is <[3]> a normal subgroup? (yes): " +
+//                       fours.isNormal(fours.generateSubgroup(three)));
+//    System.out.println("Zmod4.findIndex(fours.getMembers(), 1) should give 1: " +
+//                       fours.findIndex(fours.getMembers(), new ModularInt(1)));
+//    System.out.println("Zmod4.findIndex(<[2]>, 1) should give -1: " +
+//                       fours.findIndex(fours.generateSubgroup(new ModularInt(2)), new ModularInt(5)));
   }
 }

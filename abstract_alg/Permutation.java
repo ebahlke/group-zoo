@@ -119,16 +119,16 @@ public class Permutation extends GroupElement {
   }
   
   public static void main(String[] args) {
-    Permutation p = new Permutation(4, 3, 2, 1);
-    System.out.println("Permutation 1 (2 cycles): " + p.toString());
-    
-    Permutation q = new Permutation(1, 2, 3, 4);
-    System.out.println("Permutation 2 (identity): " + q.toString());
-    
-    Permutation r = new Permutation(3, 2, 4, 1);
-    System.out.println("Permutation 3 (1 cycle, integer 2 fixed): " + r.toString());
-    
-    System.out.println("p equals r? " + p.equals(r));
-    System.out.println("p equals p? " + p.equals(p));
+//    Permutation p = new Permutation(4, 3, 2, 1);
+//    System.out.println("Permutation 1 (2 cycles): " + p.toString());
+//    
+//    Permutation q = new Permutation(1, 2, 3, 4);
+//    System.out.println("Permutation 2 (identity): " + q.toString());
+//    
+//    Permutation r = new Permutation(3, 2, 4, 1);
+//    System.out.println("Permutation 3 (1 cycle, integer 2 fixed): " + r.toString());
+//    
+//    System.out.println("p equals r? " + p.equals(r));
+//    System.out.println("p equals p? " + p.equals(p));
   }
   }

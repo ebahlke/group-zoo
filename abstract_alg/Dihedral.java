@@ -104,41 +104,41 @@ public class Dihedral extends GroupElement {
   
   //main method for testing use only
   public static void main(String[] args) {
-    double testSigFigs1 = 1;
-    double testSigFigs2 = 3.14159265358979;
-    double testSigFigs3 = 0.009;
-    double testSigFigs4 = 30000.100;
-    
-    System.out.println(testSigFigs1 + " with two decimal places (1.0): "
-                         + roundTwoDecimals(testSigFigs1));
-    System.out.println(testSigFigs2 + " with two decimal places (3.14): "
-                         + roundTwoDecimals(testSigFigs2));
-    System.out.println(testSigFigs3 + " with two decimal places (0.01): "
-                         + roundTwoDecimals(testSigFigs3));
-    System.out.println(testSigFigs4 + " with two decimal places (30000.1): "
-                         + roundTwoDecimals(testSigFigs4) + "\n");
-    
-    Dihedral rotationtest = new Dihedral("rotation", 90.0);
-    System.out.println("toString (rotation of 90.0 degrees): " + rotationtest);
-    System.out.println("Get type (rotation): " + rotationtest.getType());
-    System.out.println("Is rotation? (true): " + rotationtest.isRotation());
-    System.out.println("Is reflection? (false): " + rotationtest.isReflection() + "\n");
-    
-    Dihedral reflectiontest = new Dihedral("reflection", 90);
-    System.out.println("toString (reflection of 120.0 degrees): " + reflectiontest);
-    System.out.println("Get type (reflection): " + reflectiontest.getType());
-    System.out.println("Is rotation? (false): " + reflectiontest.isRotation());
-    System.out.println("Is reflection? (true): " + reflectiontest.isReflection() + "\n");
-    
-    Dihedral catfail = new Dihedral("cat", 180);
-    System.out.println("toString (Not a Dihedral element. Please correct input.): "
-                         + catfail);
-    
-    Dihedral rotationtest2 = new Dihedral("rotation", 540.5);
-    System.out.println("toString (rotation of 540.5 degrees): " + rotationtest2);
-    System.out.println("Get type (rotation): " + rotationtest2.getType());
-    System.out.println("Is rotation? (true): " + rotationtest2.isRotation());
-    System.out.println("Is reflection? (false): " + rotationtest2.isReflection() + "\n");
+//    double testSigFigs1 = 1;
+//    double testSigFigs2 = 3.14159265358979;
+//    double testSigFigs3 = 0.009;
+//    double testSigFigs4 = 30000.100;
+//    
+//    System.out.println(testSigFigs1 + " with two decimal places (1.0): "
+//                         + roundTwoDecimals(testSigFigs1));
+//    System.out.println(testSigFigs2 + " with two decimal places (3.14): "
+//                         + roundTwoDecimals(testSigFigs2));
+//    System.out.println(testSigFigs3 + " with two decimal places (0.01): "
+//                         + roundTwoDecimals(testSigFigs3));
+//    System.out.println(testSigFigs4 + " with two decimal places (30000.1): "
+//                         + roundTwoDecimals(testSigFigs4) + "\n");
+//    
+//    Dihedral rotationtest = new Dihedral("rotation", 90.0);
+//    System.out.println("toString (rotation of 90.0 degrees): " + rotationtest);
+//    System.out.println("Get type (rotation): " + rotationtest.getType());
+//    System.out.println("Is rotation? (true): " + rotationtest.isRotation());
+//    System.out.println("Is reflection? (false): " + rotationtest.isReflection() + "\n");
+//    
+//    Dihedral reflectiontest = new Dihedral("reflection", 90);
+//    System.out.println("toString (reflection of 120.0 degrees): " + reflectiontest);
+//    System.out.println("Get type (reflection): " + reflectiontest.getType());
+//    System.out.println("Is rotation? (false): " + reflectiontest.isRotation());
+//    System.out.println("Is reflection? (true): " + reflectiontest.isReflection() + "\n");
+//    
+//    Dihedral catfail = new Dihedral("cat", 180);
+//    System.out.println("toString (Not a Dihedral element. Please correct input.): "
+//                         + catfail);
+//    
+//    Dihedral rotationtest2 = new Dihedral("rotation", 540.5);
+//    System.out.println("toString (rotation of 540.5 degrees): " + rotationtest2);
+//    System.out.println("Get type (rotation): " + rotationtest2.getType());
+//    System.out.println("Is rotation? (true): " + rotationtest2.isRotation());
+//    System.out.println("Is reflection? (false): " + rotationtest2.isReflection() + "\n");
   }
                         
 }

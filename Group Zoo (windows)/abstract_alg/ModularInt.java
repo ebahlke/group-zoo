@@ -23,6 +23,7 @@ public class ModularInt extends GroupElement {
     return "[" + intValue + "]";
   }
   
+  /* Stub method; the functional equals method for ModularInts is in ZmodN. */
   public boolean equals(GroupElement e) {
     return false;
   }

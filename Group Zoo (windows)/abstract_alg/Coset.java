@@ -82,14 +82,10 @@ public class Coset extends GroupElement {
   }
   
   public static void main(String[] args) {
-    PermutationGroup pg = new PermutationGroup(3);
-    LinkedList<Integer> l = new LinkedList<Integer>();
-    l.add(3);
-    l.add(1);
-    l.add(2);
-    Permutation p = new Permutation(l);
-    LinkedList<GroupElement> sg = pg.generateSubgroup(p);
-    Coset c = new Coset(pg, sg, sg.get(0));
-    System.out.println(c.toString());
+//    PermutationGroup pg = new PermutationGroup(3);
+//    Permutation p = new Permutation(3, 1, 2);
+//    LinkedList<GroupElement> sg = pg.generateSubgroup(p);
+//    Coset c = new Coset(pg, sg, sg.get(0));
+//    System.out.println(c.toString());
   }
 }

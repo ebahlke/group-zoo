@@ -182,207 +182,207 @@ public class DihedralGroup extends Group {
   //note: R_angle refers to a rotation of angle and F_angle refers to a
   // reflection (flip) over angle
   public static void main(String[] args) {
-    DihedralGroup test1 = new DihedralGroup(4);
-    System.out.println("Testing of DihedralGroup class using D_4");
-    System.out.println(test1 + "\n");
-    
-    //tests group order
-    System.out.println("Group order (8): " + test1.getGroupOrder() + "\n");
-    
-    //tests identity
-    System.out.println("Identity of group (R_0): " + test1.getIdentity() + "\n");
-    
-    //tests operate for two rotations
-    System.out.println("Testing of operate method for two rotations: ");
-    System.out.println("R_0 + R_0 (R_0): " +
-                       test1.operate(test1.rotations[0], test1.rotations[0]));
-    System.out.println("R_90 + R_180 (R_270): " +
-                       test1.operate(test1.rotations[1], test1.rotations[2]));
-    System.out.println("R_180 + R_270 (R_90): " +
-                       test1.operate(test1.rotations[2], test1.rotations[3]) + "\n");
-    
-    //tests operate for two flips (reflections)
-    System.out.println("Testing of operate method for two reflections: ");
-    System.out.println("F_0 + F_0 (R_0): " +
-                       test1.operate(test1.reflections[0], test1.reflections[0]));
-    System.out.println("F_45 + F_90 (R_270): " +
-                       test1.operate(test1.reflections[1], test1.reflections[2]));
-    System.out.println("F_135 + F_90 (R_90): " +
-                       test1.operate(test1.reflections[3], test1.reflections[2])
-                         + "\n");
-    
-    //tests operate for a flip and a rotation
-    System.out.println("Testing of operate method for one rotation"
-                         + " and one reflection: ");
-    System.out.println("F_90 + R_0 (F_90): " +
-                       test1.operate(test1.reflections[2], test1.rotations[0]));
-    System.out.println("R_0 + F_90 (F_90): " +
-                       test1.operate(test1.rotations[0], test1.reflections[2]));
-    System.out.println("F_45 + R_270 (F_90): " +
-                       test1.operate(test1.reflections[1], test1.rotations[3]));
-    System.out.println("R_270 + F_45 (F_0): " +
-                       test1.operate(test1.rotations[3], test1.reflections[1]));
-    System.out.println("F_0 + R_90 (F_135): " +
-                       test1.operate(test1.reflections[0], test1.rotations[1]));
-    System.out.println("R_90 + F_0 (F_45): " +
-                       test1.operate(test1.rotations[1], test1.reflections[0])
-                         + "\n");
-    
-    //tests getInverse
-    System.out.println("Inverse of R_270 (R_90): "
-                         + test1.getInverse(test1.rotations[3]));
-    System.out.println("Inverse of R_0 (R_0): "
-                         + test1.getInverse(test1.rotations[0]));
-    System.out.println("Inverse of F_45 (F_45): "
-                         + test1.getInverse(test1.reflections[1]) + "\n");
-    
-    
-    //tests element order
-    System.out.println("Order of identity (1): "
-                         + test1.computeElementOrder(test1.rotations[0]));
-    System.out.println("Order of identity (1): "
-                         + test1.rotations[0].getOrder());
-    System.out.println("Order of R_270 (4): "
-                         + test1.rotations[3].getOrder());
-    System.out.println("Order of R_270 (4): "
-                         + test1.computeElementOrder(test1.rotations[3]));
-    System.out.println("Order of F_90 (2): "
-                         + test1.reflections[2].getOrder());
-    System.out.println("Order of R_90 (4): "
-                         + test1.rotations[1].getOrder() + "\n");
-    
-    //tests equals method
-    System.out.println("Testing of equals method: ");
-    System.out.println(test1.members.get(4) +" equals "
-                         + test1.reflections[0] + "? (true): "
-                         + test1.equals(test1.members.get(4), test1.reflections[0]));
-    System.out.println(test1.rotations[1] +" equals "
-                         + test1.reflections[2] + "? (false): "
-                         + test1.equals(test1.rotations[1], test1.reflections[2]));
-    System.out.println(test1.reflections[1] +" equals "
-                         + test1.reflections[2] + "? (false): "
-                         + test1.equals(test1.reflections[1], test1.reflections[2]));
-    System.out.println(test1.identity +" equals "
-                         + test1.rotations[0] + "? (true): "
-                         + test1.equals(test1.identity, test1.rotations[0]));
-    Dihedral overSize = new Dihedral("rotation", 450);
-    Dihedral underSize = new Dihedral("rotation", -270);
-    System.out.println(overSize +" equals " + underSize + "? (true): "
-                         + test1.equals(overSize, underSize) + "\n");
-    
-    
-    //tests mod helper method
-    System.out.println("9mod5 (4.0): " + mod(9,5));
-    System.out.println("-6mod5 (4.0): " + mod(-6,5));
-    System.out.println("7mod(-4) (-1.0): " + mod(7,-4) + "\n");
-        
-    //tests subgroups and checks if they are normal (inherited from Group)
-    System.out.println("Tests subgroup generator and normality:");
-    LinkedList<GroupElement> subgp1 = test1.generateSubgroup(test1.rotations[0]);
-    System.out.println("Subgroup generated by R_0 ([R_0]): " + subgp1);
-    System.out.println("isNormal? (true): " + test1.isNormal(subgp1));
-    LinkedList<GroupElement> subgp2 = test1.generateSubgroup(test1.rotations[1]);
-    System.out.println("Subgroup generated by R_90 ([R_0, R_90, R_180, R_270]): "
-                         + subgp2);
-    System.out.println("isNormal? (true): " + test1.isNormal(subgp2));
-    LinkedList<GroupElement> subgp3 = test1.generateSubgroup(test1.rotations[2]);
-    System.out.println("Subgroup generated by R_180 ([R_0, R_180]): " + subgp3);
-    System.out.println("isNormal? (true): " + test1.isNormal(subgp3));
-    LinkedList<GroupElement> subgp4 = test1.generateSubgroup(test1.rotations[3]);
-    System.out.println("Subgroup generated by R_270 ([R_0, R_90, R_180, R_270]): "
-                         + subgp4);
-    LinkedList<GroupElement> subgp5 = test1.generateSubgroup(test1.reflections[3]);
-    System.out.println("Subgroup generated by F_135 ([R_0, F_135]): " + subgp5);
-    System.out.println("isNormal? (false): " + test1.isNormal(subgp5));
-    System.out.println("Is D_4 normal? (true): " + test1.isNormal(test1.members)
-                       + "\n");
-    
-    //tests add in order helper method
-    LinkedList<GroupElement> addTest = new LinkedList<GroupElement>();
-    test1.addInOrder(addTest, test1.reflections[3]);
-    System.out.println("Added F_135 ([F_135]): " + addTest);
-    test1.addInOrder(addTest, test1.reflections[1]);
-    System.out.println("Added F_45 ([F_45, F_135]): " + addTest);
-    test1.addInOrder(addTest, (Dihedral)test1.identity);
-    System.out.println("Added identity ([R_0, F_45, F_135]): " + addTest);
-    test1.addInOrder(addTest, new Dihedral("rotation", 120));
-    System.out.println("Attempted to add R_120 ([R_0, F_45, F_135]): " + addTest
-                         + "\n");
-    
-   System.out.println("************************************************************");
-   DihedralGroup test2 = new DihedralGroup(3);
-   System.out.println("Testing of DihedralGroup class using D_3");
-   System.out.println(test2 + "\n");
-    
-    //tests group order
-   System.out.println("Group order (6): " + test2.getGroupOrder() + "\n");
-    
-    //tests identity
-   System.out.println("Identity of group (R_0): " + test2.getIdentity() + "\n");
-    
-    //tests operate for two rotations
-   System.out.println("Testing of operate method for two rotations: ");
-   System.out.println("R_0 + R_0 (R_0): " +
-                      test2.operate(test2.rotations[0], test2.rotations[0]));
-   System.out.println("R_120 + R_240 (R_0): " +
-                      test2.operate(test2.rotations[1], test2.rotations[2]));
-   System.out.println("R_240 + R_240 (R_120): " +
-                      test2.operate(test2.rotations[2], test2.rotations[2]) + "\n");
-    
-    //tests operate for two flips (reflections)
-   System.out.println("Testing of operate method for two reflections: ");
-   System.out.println("F_0 + F_0 (R_0): " +
-                      test2.operate(test2.reflections[0], test2.reflections[0]));
-   System.out.println("F_120 + F_120 (R_0): " +
-                      test2.operate(test2.reflections[2], test2.reflections[2])
-                        + "\n");
-   
-    //tests operate for a flip and a rotation
-   System.out.println("Testing of operate method for one rotation"
-                        + " and one reflection: ");
-   System.out.println("F_120 + R_0 (F_120): " +
-                      test2.operate(test2.reflections[2], test2.rotations[0]));
-   System.out.println("R_0 + F_120 (F_120): " +
-                      test2.operate(test2.rotations[0], test2.reflections[2]));
-    
-    //tests getInverse
-   System.out.println("Inverse of R_240 (R_120): "
-                        + test2.getInverse(test2.rotations[2]));
-   System.out.println("Inverse of F_60 (F_60): "
-                         + test2.getInverse(test2.reflections[1]) + "\n");    
-    
-    //tests element order
-   System.out.println("Order of identity (1): "
-                        + test2.computeElementOrder(test2.rotations[0]));
-   System.out.println("Order of R_240 (3): "
-                        + test2.computeElementOrder(test2.rotations[2]));
-   System.out.println("Order of F_120 (2): "
-                        + test2.reflections[2].getOrder() + "\n");
-    
-    //tests equals method
-   System.out.println("Testing of equals method: ");
-   System.out.println(test2.members.get(4) +" equals "
-                        + test2.reflections[1] + "? (true): "
-                        + test2.equals(test2.members.get(4), test2.reflections[1]));
-   System.out.println(test2.identity +" equals "
-                        + test2.rotations[0] + "? (true): "
-                        + test2.equals(test2.identity, test2.rotations[0]));
-      
-    //tests subgroups
-   System.out.println("Subgroup generated by R_0 ([R_0]): "
-                        + test2.generateSubgroup(test2.rotations[0]));
-   System.out.println("Subgroup generated by R_240 ([R_0, R_120, R_240]): "
-                        + test2.generateSubgroup(test2.rotations[2]));
-   System.out.println("Subgroup generated by F_120 ([R_0, F_120]): "
-                        + test2.generateSubgroup(test2.reflections[2]) + "\n");
-   
-   System.out.println("************************************************************");
-   DihedralGroup test3 = new DihedralGroup(7);
-   System.out.println("Testing of DihedralGroup class using D_7");
-   System.out.println(test3 + "\n");
-   System.out.println("Generating a subgroup in D_7:");
-   System.out.println(test3.generateSubgroup(test3.members.get(2)));
-   System.out.println("Storing elements by order in D_7.");
-   test3.storeElementsByOrder();
+//    DihedralGroup test1 = new DihedralGroup(4);
+//    System.out.println("Testing of DihedralGroup class using D_4");
+//    System.out.println(test1 + "\n");
+//    
+//    //tests group order
+//    System.out.println("Group order (8): " + test1.getGroupOrder() + "\n");
+//    
+//    //tests identity
+//    System.out.println("Identity of group (R_0): " + test1.getIdentity() + "\n");
+//    
+//    //tests operate for two rotations
+//    System.out.println("Testing of operate method for two rotations: ");
+//    System.out.println("R_0 + R_0 (R_0): " +
+//                       test1.operate(test1.rotations[0], test1.rotations[0]));
+//    System.out.println("R_90 + R_180 (R_270): " +
+//                       test1.operate(test1.rotations[1], test1.rotations[2]));
+//    System.out.println("R_180 + R_270 (R_90): " +
+//                       test1.operate(test1.rotations[2], test1.rotations[3]) + "\n");
+//    
+//    //tests operate for two flips (reflections)
+//    System.out.println("Testing of operate method for two reflections: ");
+//    System.out.println("F_0 + F_0 (R_0): " +
+//                       test1.operate(test1.reflections[0], test1.reflections[0]));
+//    System.out.println("F_45 + F_90 (R_270): " +
+//                       test1.operate(test1.reflections[1], test1.reflections[2]));
+//    System.out.println("F_135 + F_90 (R_90): " +
+//                       test1.operate(test1.reflections[3], test1.reflections[2])
+//                         + "\n");
+//    
+//    //tests operate for a flip and a rotation
+//    System.out.println("Testing of operate method for one rotation"
+//                         + " and one reflection: ");
+//    System.out.println("F_90 + R_0 (F_90): " +
+//                       test1.operate(test1.reflections[2], test1.rotations[0]));
+//    System.out.println("R_0 + F_90 (F_90): " +
+//                       test1.operate(test1.rotations[0], test1.reflections[2]));
+//    System.out.println("F_45 + R_270 (F_90): " +
+//                       test1.operate(test1.reflections[1], test1.rotations[3]));
+//    System.out.println("R_270 + F_45 (F_0): " +
+//                       test1.operate(test1.rotations[3], test1.reflections[1]));
+//    System.out.println("F_0 + R_90 (F_135): " +
+//                       test1.operate(test1.reflections[0], test1.rotations[1]));
+//    System.out.println("R_90 + F_0 (F_45): " +
+//                       test1.operate(test1.rotations[1], test1.reflections[0])
+//                         + "\n");
+//    
+//    //tests getInverse
+//    System.out.println("Inverse of R_270 (R_90): "
+//                         + test1.getInverse(test1.rotations[3]));
+//    System.out.println("Inverse of R_0 (R_0): "
+//                         + test1.getInverse(test1.rotations[0]));
+//    System.out.println("Inverse of F_45 (F_45): "
+//                         + test1.getInverse(test1.reflections[1]) + "\n");
+//    
+//    
+//    //tests element order
+//    System.out.println("Order of identity (1): "
+//                         + test1.computeElementOrder(test1.rotations[0]));
+//    System.out.println("Order of identity (1): "
+//                         + test1.rotations[0].getOrder());
+//    System.out.println("Order of R_270 (4): "
+//                         + test1.rotations[3].getOrder());
+//    System.out.println("Order of R_270 (4): "
+//                         + test1.computeElementOrder(test1.rotations[3]));
+//    System.out.println("Order of F_90 (2): "
+//                         + test1.reflections[2].getOrder());
+//    System.out.println("Order of R_90 (4): "
+//                         + test1.rotations[1].getOrder() + "\n");
+//    
+//    //tests equals method
+//    System.out.println("Testing of equals method: ");
+//    System.out.println(test1.members.get(4) +" equals "
+//                         + test1.reflections[0] + "? (true): "
+//                         + test1.equals(test1.members.get(4), test1.reflections[0]));
+//    System.out.println(test1.rotations[1] +" equals "
+//                         + test1.reflections[2] + "? (false): "
+//                         + test1.equals(test1.rotations[1], test1.reflections[2]));
+//    System.out.println(test1.reflections[1] +" equals "
+//                         + test1.reflections[2] + "? (false): "
+//                         + test1.equals(test1.reflections[1], test1.reflections[2]));
+//    System.out.println(test1.identity +" equals "
+//                         + test1.rotations[0] + "? (true): "
+//                         + test1.equals(test1.identity, test1.rotations[0]));
+//    Dihedral overSize = new Dihedral("rotation", 450);
+//    Dihedral underSize = new Dihedral("rotation", -270);
+//    System.out.println(overSize +" equals " + underSize + "? (true): "
+//                         + test1.equals(overSize, underSize) + "\n");
+//    
+//    
+//    //tests mod helper method
+//    System.out.println("9mod5 (4.0): " + mod(9,5));
+//    System.out.println("-6mod5 (4.0): " + mod(-6,5));
+//    System.out.println("7mod(-4) (-1.0): " + mod(7,-4) + "\n");
+//        
+//    //tests subgroups and checks if they are normal (inherited from Group)
+//    System.out.println("Tests subgroup generator and normality:");
+//    LinkedList<GroupElement> subgp1 = test1.generateSubgroup(test1.rotations[0]);
+//    System.out.println("Subgroup generated by R_0 ([R_0]): " + subgp1);
+//    System.out.println("isNormal? (true): " + test1.isNormal(subgp1));
+//    LinkedList<GroupElement> subgp2 = test1.generateSubgroup(test1.rotations[1]);
+//    System.out.println("Subgroup generated by R_90 ([R_0, R_90, R_180, R_270]): "
+//                         + subgp2);
+//    System.out.println("isNormal? (true): " + test1.isNormal(subgp2));
+//    LinkedList<GroupElement> subgp3 = test1.generateSubgroup(test1.rotations[2]);
+//    System.out.println("Subgroup generated by R_180 ([R_0, R_180]): " + subgp3);
+//    System.out.println("isNormal? (true): " + test1.isNormal(subgp3));
+//    LinkedList<GroupElement> subgp4 = test1.generateSubgroup(test1.rotations[3]);
+//    System.out.println("Subgroup generated by R_270 ([R_0, R_90, R_180, R_270]): "
+//                         + subgp4);
+//    LinkedList<GroupElement> subgp5 = test1.generateSubgroup(test1.reflections[3]);
+//    System.out.println("Subgroup generated by F_135 ([R_0, F_135]): " + subgp5);
+//    System.out.println("isNormal? (false): " + test1.isNormal(subgp5));
+//    System.out.println("Is D_4 normal? (true): " + test1.isNormal(test1.members)
+//                       + "\n");
+//    
+//    //tests add in order helper method
+//    LinkedList<GroupElement> addTest = new LinkedList<GroupElement>();
+//    test1.addInOrder(addTest, test1.reflections[3]);
+//    System.out.println("Added F_135 ([F_135]): " + addTest);
+//    test1.addInOrder(addTest, test1.reflections[1]);
+//    System.out.println("Added F_45 ([F_45, F_135]): " + addTest);
+//    test1.addInOrder(addTest, (Dihedral)test1.identity);
+//    System.out.println("Added identity ([R_0, F_45, F_135]): " + addTest);
+//    test1.addInOrder(addTest, new Dihedral("rotation", 120));
+//    System.out.println("Attempted to add R_120 ([R_0, F_45, F_135]): " + addTest
+//                         + "\n");
+//    
+//   System.out.println("************************************************************");
+//   DihedralGroup test2 = new DihedralGroup(3);
+//   System.out.println("Testing of DihedralGroup class using D_3");
+//   System.out.println(test2 + "\n");
+//    
+//    //tests group order
+//   System.out.println("Group order (6): " + test2.getGroupOrder() + "\n");
+//    
+//    //tests identity
+//   System.out.println("Identity of group (R_0): " + test2.getIdentity() + "\n");
+//    
+//    //tests operate for two rotations
+//   System.out.println("Testing of operate method for two rotations: ");
+//   System.out.println("R_0 + R_0 (R_0): " +
+//                      test2.operate(test2.rotations[0], test2.rotations[0]));
+//   System.out.println("R_120 + R_240 (R_0): " +
+//                      test2.operate(test2.rotations[1], test2.rotations[2]));
+//   System.out.println("R_240 + R_240 (R_120): " +
+//                      test2.operate(test2.rotations[2], test2.rotations[2]) + "\n");
+//    
+//    //tests operate for two flips (reflections)
+//   System.out.println("Testing of operate method for two reflections: ");
+//   System.out.println("F_0 + F_0 (R_0): " +
+//                      test2.operate(test2.reflections[0], test2.reflections[0]));
+//   System.out.println("F_120 + F_120 (R_0): " +
+//                      test2.operate(test2.reflections[2], test2.reflections[2])
+//                        + "\n");
+//   
+//    //tests operate for a flip and a rotation
+//   System.out.println("Testing of operate method for one rotation"
+//                        + " and one reflection: ");
+//   System.out.println("F_120 + R_0 (F_120): " +
+//                      test2.operate(test2.reflections[2], test2.rotations[0]));
+//   System.out.println("R_0 + F_120 (F_120): " +
+//                      test2.operate(test2.rotations[0], test2.reflections[2]));
+//    
+//    //tests getInverse
+//   System.out.println("Inverse of R_240 (R_120): "
+//                        + test2.getInverse(test2.rotations[2]));
+//   System.out.println("Inverse of F_60 (F_60): "
+//                         + test2.getInverse(test2.reflections[1]) + "\n");    
+//    
+//    //tests element order
+//   System.out.println("Order of identity (1): "
+//                        + test2.computeElementOrder(test2.rotations[0]));
+//   System.out.println("Order of R_240 (3): "
+//                        + test2.computeElementOrder(test2.rotations[2]));
+//   System.out.println("Order of F_120 (2): "
+//                        + test2.reflections[2].getOrder() + "\n");
+//    
+//    //tests equals method
+//   System.out.println("Testing of equals method: ");
+//   System.out.println(test2.members.get(4) +" equals "
+//                        + test2.reflections[1] + "? (true): "
+//                        + test2.equals(test2.members.get(4), test2.reflections[1]));
+//   System.out.println(test2.identity +" equals "
+//                        + test2.rotations[0] + "? (true): "
+//                        + test2.equals(test2.identity, test2.rotations[0]));
+//      
+//    //tests subgroups
+//   System.out.println("Subgroup generated by R_0 ([R_0]): "
+//                        + test2.generateSubgroup(test2.rotations[0]));
+//   System.out.println("Subgroup generated by R_240 ([R_0, R_120, R_240]): "
+//                        + test2.generateSubgroup(test2.rotations[2]));
+//   System.out.println("Subgroup generated by F_120 ([R_0, F_120]): "
+//                        + test2.generateSubgroup(test2.reflections[2]) + "\n");
+//   
+//   System.out.println("************************************************************");
+//   DihedralGroup test3 = new DihedralGroup(7);
+//   System.out.println("Testing of DihedralGroup class using D_7");
+//   System.out.println(test3 + "\n");
+//   System.out.println("Generating a subgroup in D_7:");
+//   System.out.println(test3.generateSubgroup(test3.members.get(2)));
+//   System.out.println("Storing elements by order in D_7.");
+//   test3.storeElementsByOrder();
   }
 }
