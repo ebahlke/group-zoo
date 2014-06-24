@@ -21,7 +21,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleIconFile</key>
-	<string>GenericApp.icns</string>
+	<string>symgroup.icns</string>
 	<key>Java</key>
 	<dict>
 		<key>MainClass</key>
@@ -29,10 +29,7 @@
 		<key>JVMVersion</key>
 		<string>1.5+</string>
 		<key>ClassPath</key>
-			<array>
-			<string>$JAVAROOT/</string>
-			<string>$JAVAROOT/GroupZoo.jar</string>
-			</array>
+			<string>$JAVAROOT/gztest.jar</string>
 	</dict>
 </dict>
 </plist>
