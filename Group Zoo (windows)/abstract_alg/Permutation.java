@@ -33,6 +33,34 @@ public class Permutation extends GroupElement {
     }
   }
   
+  /* Fast constructor that, given a dimension in which to work, converts from
+   * quasi-cycle notation in the arguments to a complete permutation - i.e. if
+   * you just want to create the permutation (132) in S5, this can be achieved
+   * by Permutation(true, 5, 1, 3, 2). */
+  public Permutation(boolean specialConstructor, int dimension, int ... arguments) {
+	  size = dimension;
+	  LinkedList<Integer> yValues = new LinkedList<Integer>();
+
+	  for (int i = 1; i <= size; i++)
+		  yValues.add(i);
+
+	  int nextPositionInCycle = 1;
+
+	  for (int j = 0; j < arguments.length; j++) {
+		  yValues.set(arguments[j]-1, arguments[nextPositionInCycle]);
+		  nextPositionInCycle = (nextPositionInCycle+1)%arguments.length;
+	  }
+
+	  System.out.println(yValues);
+
+	  functionVals = new Hashtable<Integer, Integer>(size);
+	  int xValue = 1;
+	  for (int i = 0; i < size; i++) {
+		  functionVals.put(xValue, yValues.get(i));
+		  xValue++;
+	  }
+  }
+
   public Hashtable<Integer, Integer> getFunctionVals() {
     return functionVals;
   }
@@ -119,6 +147,8 @@ public class Permutation extends GroupElement {
   }
   
   public static void main(String[] args) {
+	  Permutation p = new Permutation(true, 4, 1, 2);
+	  System.out.println(p);
 //    Permutation p = new Permutation(4, 3, 2, 1);
 //    System.out.println("Permutation 1 (2 cycles): " + p.toString());
 //    

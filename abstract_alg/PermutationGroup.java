@@ -132,14 +132,11 @@ public class PermutationGroup extends Group {
   
   /* Decomposes the given permutation into a "product", or in this case a
    * LinkedList, of (non-disjoint) 2-cycles, such that multiplying these 2-cycles
-   * out would yield the original permutation. The heart of the method is to first
-   * assemble a list of the starting points of all the distinct cycles in the
-   * original permutation, then traverse and decompose each cycle individually. The whole
-   * method is motivated by tricky cases as the permutation (143)(26) in S6: the desired
-   * decomposition is (14)(13)(26), but if we start from just a single point in the
-   * permutation, not all information will be recovered.  So we need to find both 1 and 2
-   * as the starting points of disjoint cycles (while leaving 5, which is fixed, alone)
-   * and then decompose .*/
+   * out would yield the original permutation. The recipe for the decomposition
+   * of a permutation is, for each distinct cycle, to take the starting point
+   * of the cycle, swap with the last element in the cycle, then swap with the
+   * second-to-last element in the cycle... etc.  So, for instance, (143)(526) =
+   * (13)(14)(56)(52). */
   public LinkedList<Permutation> decompose(Permutation p) {
     LinkedList<Permutation> decomposition = new LinkedList<Permutation>();
     
@@ -149,49 +146,21 @@ public class PermutationGroup extends Group {
     }
     
     else {
-      Hashtable<Integer, Integer> allFunctionVals = p.getFunctionVals();
       LinkedList<Integer> cycleMembers = p.getNonFixedVals();
-      LinkedList<Integer> allOrigins = new LinkedList<Integer>();
       
-      // find an origin for every cycle:
       while (cycleMembers.size() > 0) {
         int cycleStart = cycleMembers.get(0);
-        allOrigins.add(cycleStart);
-        
         LinkedList<Integer> correspondingCycle = p.getFullCycle(cycleStart);
         
+        // for each member in the cycle from cycle[last] to cycle[1], create a new swap permutation with cycle[0]:
+        for (int i = correspondingCycle.size()-1; i > 0; i--) {
+        	Permutation toAdd = new Permutation(true, dimension, correspondingCycle.get(0), correspondingCycle.get(i));
+        	decomposition.add(toAdd);
+        }
+        
+        // then completely remove the cycle we just decomposed and move on to the next one, or end the process if this was the last:
         for (int i = 0; i < correspondingCycle.size(); i++)
           cycleMembers.removeFirstOccurrence(correspondingCycle.get(i));
-      }
-      
-      // now decompose all the cycles into 2-cycles:
-      LinkedList<Integer> base = new LinkedList<Integer>();
-      LinkedList<Integer> traversed = new LinkedList<Integer>();
-      traversed.addAll(allOrigins); // the point we start from in each cycle is by default "traversed"
-      
-      int cyclesDoneSoFar = 0; // tracks position in allOrigins
-      int cycleOrigin = allOrigins.get(0);
-      int currentPos = allFunctionVals.get(cycleOrigin);
-      
-      while (cyclesDoneSoFar < allOrigins.size()) {
-        if (!traversed.contains(currentPos)) {
-          traversed.add(currentPos);
-          
-          base = oneToN(dimension); // <- list(1, ..., n)
-          swap(base, cycleOrigin, currentPos);
-          Permutation twoCycle = new Permutation(base);
-          decomposition.addFirst(twoCycle);
-          
-          currentPos = allFunctionVals.get(currentPos);
-        }
-        else {
-          cyclesDoneSoFar++;
-          if (cyclesDoneSoFar == allOrigins.size()) { /*finish*/ }
-          else { /*move to the next cycle*/
-            cycleOrigin = allOrigins.get(cyclesDoneSoFar);
-            currentPos = allFunctionVals.get(cycleOrigin); 
-          }
-        }
       }
       
       return decomposition;
@@ -270,17 +239,6 @@ public class PermutationGroup extends Group {
     return toReturn;
   }
   
-  /* Swaps the position of two integers a and b in a list of integers. */
-  private LinkedList<Integer> swap(LinkedList<Integer> list, int a, int b) {
-    int index1 = list.indexOf(a);
-    int index2 = list.indexOf(b);
-    int temp = list.get(index1);
-    list.set(index1, list.get(index2));
-    list.set(index2, temp);
-    
-    return list;
-  }
-  
   /* Reverses the entries in a linked list of permutations. */
   private LinkedList<Permutation> reverse(LinkedList<Permutation> list) {
     LinkedList<Permutation> reversed = new LinkedList<Permutation>();
@@ -334,7 +292,7 @@ public class PermutationGroup extends Group {
 //    System.out.println("The decomposition of (1234) should be (14)(13)(12). Actually is: "
 //                         + pg.decompose(shift));
 //    System.out.println("chainOperate on this decomposition should return (1234). Actually returns: "
-//                         + pg.chainOperate(pg.decompose(shift)));
+//                             + pg.chainOperate(pg.decompose(shift)));
 //    System.out.println("The inverse of (12)?: " + pg.getInverse(q));
 //    System.out.println("The inverse of (143)?: " + pg.getInverse(r));
 //    System.out.println("The inverse of (1234)?: " + pg.getInverse(shift));
