@@ -34,7 +34,9 @@ public class FactorGroup extends Group {
     
     modOut();
   }
-  
+    
+    /* Generates the members of the factor group by finding all cosets
+     * of the "identity" subgroup in the original context group. */
   private void modOut() {
     members.add(identity);
     
